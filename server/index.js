@@ -4,7 +4,14 @@ const port = 3000
 
 app.use(express.static('public'))
 
-app.use(express.static('../client/dist'));
+//app.use(express.static('../client/dist'));
+
+const root = require('path').join(__dirname, '../client','dist')
+app.use(express.static(root))
+
+app.get('/', (req,res)=>{
+    res.sendFile('index.html', {root})
+})
 
 // define our server routes
 app.get('/test', (req, res)=>{
